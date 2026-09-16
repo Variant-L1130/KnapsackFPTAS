@@ -48,6 +48,44 @@ public class GreedyKnapsack {
         }
 
 
+        // Best single item that fits alone.
+        // Taking max(greedy fill, best single item) is what gives
+        // the greedy heuristic its provable 2-approximation bound;
+        // without it, worst-case performance is unbounded.
+        Item bestSingle = null;
+        int bestSingleValue = 0;
+
+
+        for (Item item : items) {
+
+
+            if (item.getWeight() <= capacity
+                    && item.getValue() >= bestSingleValue) {
+
+
+                bestSingleValue = item.getValue();
+                bestSingle = item;
+            }
+        }
+
+
+        if (bestSingle != null
+                && bestSingleValue > totalValue) {
+
+
+            List<Item> bestSingleList =
+                    new ArrayList<>();
+            bestSingleList.add(bestSingle);
+
+
+            return new ExactKnapsack.Result(
+                    bestSingleValue,
+                    bestSingle.getWeight(),
+                    bestSingleList
+            );
+        }
+
+
         return new ExactKnapsack.Result(
                 totalValue,
                 totalWeight,
