@@ -1,0 +1,17 @@
+# Compiled Java
+out/
+*.class
+src/knapsack/*.class
+
+# Python
+analysis/.venv/
+__pycache__/
+
+# Generated experiment data (regenerable via java -cp src knapsack.Main)
+results.csv
+correlated_results.csv
+
+# OS
+.DS_Store
+
+# Plots/figures are generated from the CSVs by analysis/analyze.py
